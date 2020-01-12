@@ -12,7 +12,7 @@ import {
   Desktop, StatusCritical, Login, Action, Aggregate, Calculator, Music, Refresh,
   Install, InstallOption, Apps, Directions, Search, LinkBottom, Services, UserSettings,
   Logout, User, Close, Checkmark, Group, Google, WifiNone, Wifi, Link as LinkIcon, Template,
-  Share, CirclePlay, DocumentPdf, Image as ImageIcon, Note, Download, Upload, Star, DocumentText
+  Share, CirclePlay, DocumentPdf, Image as ImageIcon, Note, Download, Upload, Star, DocumentText, Chat as ChatIcon
 } from 'grommet-icons'
 
 import * as Nodehub from './components/node'
@@ -50,7 +50,7 @@ const icons = {
   Desktop, StatusCritical, Login, Action, Aggregate, Calculator, Music, Refresh,
   Install, InstallOption, Apps, Directions, Search, LinkBottom, Services, UserSettings,
   Logout, User, Close, Checkmark, Group, Google, WifiNone, Wifi, Link: LinkIcon, Template,
-  Share, CirclePlay, DocumentPdf, Image: ImageIcon, Note, Download, Upload, Star, DocumentText
+  Share, CirclePlay, DocumentPdf, Image: ImageIcon, Note, Download, Upload, Star, DocumentText, Chat: ChatIcon,
 }
 const DnD = { ...ReactDnD, HTML5Backend, NativeTypes }
 const baseDeps = {

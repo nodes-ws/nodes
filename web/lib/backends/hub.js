@@ -105,7 +105,10 @@ class HubBackend extends BaseBackend {
   }
 
   async search (text) {
-    notImplementedError('search')
+    // notImplementedError('search')
+    const res = await this.nodes.find({ query: { name: text } })
+    console.log('[HubBackend] found', res)
+    return { results: res.data }
   }
 }
 
