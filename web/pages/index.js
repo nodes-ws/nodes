@@ -61,7 +61,7 @@ const IndexPage = () => {
           </Box>
         </Box>
         <Box fill='horizontal' height='xsmall' as='footer'>
-          <Box align='center' justify='center' fill='horizontal' direction='row' pad='large'><Text size='small'>Nodes © 2019</Text></Box>
+          <Box align='center' justify='center' fill='horizontal' direction='row' pad='large'><Text size='small'>Nodes © 2019-2020</Text></Box>
         </Box>
       </Box>
       <style jsx>{`

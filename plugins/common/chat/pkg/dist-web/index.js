@@ -22,16 +22,17 @@ var index = /*#__PURE__*/
 (function () {
   var _ref2 = _asyncToGenerator(
   /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee7(_ref) {
-    var __deps__, __imports__, _imports__$grommet, Box, TextInput, Button, _imports__$utils, React, _, icons, napi, NodeView, iconSize, viewer, view, edit, icon, preview;
+  regeneratorRuntime.mark(function _callee8(_ref) {
+    var __deps__, __imports__, _imports__$grommet, Box, TextInput, Button, Keyboard, Anchor, _imports__$utils, React, _, icons, NodeLink, napi, NodeView, iconSize, viewer, view, edit, icon, preview;
 
-    return regeneratorRuntime.wrap(function _callee7$(_context7) {
+    return regeneratorRuntime.wrap(function _callee8$(_context8) {
       while (1) {
-        switch (_context7.prev = _context7.next) {
+        switch (_context8.prev = _context8.next) {
           case 0:
             __deps__ = _ref.__deps__, __imports__ = _ref.__imports__;
-            _imports__$grommet = __imports__.grommet, Box = _imports__$grommet.Box, TextInput = _imports__$grommet.TextInput, Button = _imports__$grommet.Button;
+            _imports__$grommet = __imports__.grommet, Box = _imports__$grommet.Box, TextInput = _imports__$grommet.TextInput, Button = _imports__$grommet.Button, Keyboard = _imports__$grommet.Keyboard, Anchor = _imports__$grommet.Anchor;
             _imports__$utils = __imports__.utils, React = _imports__$utils.React, _ = _imports__$utils.lodash, icons = _imports__$utils.icons;
+            NodeLink = __imports__.nodehub.NodeLink;
             napi = __deps__.napi, NodeView = __deps__.NodeView, iconSize = __deps__.iconSize, viewer = __deps__.viewer;
 
             view = function view(_ref3) {
@@ -47,6 +48,8 @@ var index = /*#__PURE__*/
                   _React$useState4 = _slicedToArray(_React$useState3, 2),
                   message = _React$useState4[0],
                   setMessage = _React$useState4[1];
+
+              console.log('VIEWER', viewer);
 
               var getOrCreateChatNode =
               /*#__PURE__*/
@@ -104,37 +107,75 @@ var index = /*#__PURE__*/
                 function () {
                   var _ref5 = _asyncToGenerator(
                   /*#__PURE__*/
-                  regeneratorRuntime.mark(function _callee2() {
-                    var chatNode, messageNodes;
-                    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                  regeneratorRuntime.mark(function _callee3() {
+                    var chatNode, messageNodes, _messages;
+
+                    return regeneratorRuntime.wrap(function _callee3$(_context3) {
                       while (1) {
-                        switch (_context2.prev = _context2.next) {
+                        switch (_context3.prev = _context3.next) {
                           case 0:
-                            _context2.next = 2;
+                            _context3.next = 2;
                             return getOrCreateChatNode();
 
                           case 2:
-                            chatNode = _context2.sent;
+                            chatNode = _context3.sent;
                             console.log('chat node', chatNode);
-                            _context2.next = 6;
+                            _context3.next = 6;
                             return napi.getNodeChildren(chatNode);
 
                           case 6:
-                            messageNodes = _context2.sent;
+                            messageNodes = _context3.sent;
                             console.log('message nodes', messageNodes);
-                            setMessages(messageNodes.items.map(function (msgNode) {
-                              return {
-                                id: msgNode.id,
-                                text: msgNode.name
-                              };
-                            }));
+                            _context3.next = 10;
+                            return Promise.all(messageNodes.items.map(
+                            /*#__PURE__*/
+                            function () {
+                              var _ref6 = _asyncToGenerator(
+                              /*#__PURE__*/
+                              regeneratorRuntime.mark(function _callee2(msgNode) {
+                                return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                                  while (1) {
+                                    switch (_context2.prev = _context2.next) {
+                                      case 0:
+                                        _context2.t0 = msgNode.id;
+                                        _context2.t1 = msgNode.name;
+                                        _context2.next = 4;
+                                        return napi.getNode(msgNode.sides.users.filter(function (u) {
+                                          return u.role === 'admin';
+                                        })[0].id);
 
-                          case 9:
+                                      case 4:
+                                        _context2.t2 = _context2.sent;
+                                        return _context2.abrupt("return", {
+                                          id: _context2.t0,
+                                          text: _context2.t1,
+                                          author: _context2.t2
+                                        });
+
+                                      case 6:
+                                      case "end":
+                                        return _context2.stop();
+                                    }
+                                  }
+                                }, _callee2);
+                              }));
+
+                              return function (_x2) {
+                                return _ref6.apply(this, arguments);
+                              };
+                            }()));
+
+                          case 10:
+                            _messages = _context3.sent;
+                            // setMessages(messageNodes.items.map(msgNode => ({ id: msgNode.id, text: msgNode.name, author: msgNode.sides.users[0] })))
+                            setMessages(_messages);
+
+                          case 12:
                           case "end":
-                            return _context2.stop();
+                            return _context3.stop();
                         }
                       }
-                    }, _callee2);
+                    }, _callee3);
                   }));
 
                   return function getInitialMessages() {
@@ -148,56 +189,34 @@ var index = /*#__PURE__*/
                 var callback =
                 /*#__PURE__*/
                 function () {
-                  var _ref7 = _asyncToGenerator(
-                  /*#__PURE__*/
-                  regeneratorRuntime.mark(function _callee3(_ref6) {
-                    var type, node;
-                    return regeneratorRuntime.wrap(function _callee3$(_context3) {
-                      while (1) {
-                        switch (_context3.prev = _context3.next) {
-                          case 0:
-                            type = _ref6.type, node = _ref6.node;
-                            console.log('chat update!', type, node);
-
-                            if (type === 'add') {
-                              setMessages([].concat(_toConsumableArray(messages), [{
-                                id: messages.length + 1,
-                                text: node.name
-                              }]));
-                            }
-
-                          case 3:
-                          case "end":
-                            return _context3.stop();
-                        }
-                      }
-                    }, _callee3);
-                  }));
-
-                  return function callback(_x2) {
-                    return _ref7.apply(this, arguments);
-                  };
-                }();
-
-                var subscribe =
-                /*#__PURE__*/
-                function () {
                   var _ref8 = _asyncToGenerator(
                   /*#__PURE__*/
-                  regeneratorRuntime.mark(function _callee4() {
-                    var chatNode;
+                  regeneratorRuntime.mark(function _callee4(_ref7) {
+                    var type, node, author;
                     return regeneratorRuntime.wrap(function _callee4$(_context4) {
                       while (1) {
                         switch (_context4.prev = _context4.next) {
                           case 0:
-                            _context4.next = 2;
-                            return getOrCreateChatNode();
-
-                          case 2:
-                            chatNode = _context4.sent;
-                            napi.subscribeToNodeChildrenUpdates(chatNode.id, callback);
+                            type = _ref7.type, node = _ref7.node;
+                            console.log('chat update!', type, node);
+                            _context4.next = 4;
+                            return napi.getNode(node.sides.users.filter(function (u) {
+                              return u.role === 'admin';
+                            })[0].id);
 
                           case 4:
+                            author = _context4.sent;
+                            console.log('author', author);
+
+                            if (type === 'add') {
+                              setMessages([].concat(_toConsumableArray(messages), [{
+                                id: messages.length + 1,
+                                text: node.name,
+                                author: author
+                              }]));
+                            }
+
+                          case 7:
                           case "end":
                             return _context4.stop();
                         }
@@ -205,12 +224,12 @@ var index = /*#__PURE__*/
                     }, _callee4);
                   }));
 
-                  return function subscribe() {
+                  return function callback(_x3) {
                     return _ref8.apply(this, arguments);
                   };
                 }();
 
-                var unsubscribe =
+                var subscribe =
                 /*#__PURE__*/
                 function () {
                   var _ref9 = _asyncToGenerator(
@@ -226,7 +245,7 @@ var index = /*#__PURE__*/
 
                           case 2:
                             chatNode = _context5.sent;
-                            napi.unsubscribeFromNodeChildrenUpdates(chatNode.id, callback);
+                            napi.subscribeToNodeChildrenUpdates(chatNode.id, callback);
 
                           case 4:
                           case "end":
@@ -236,8 +255,39 @@ var index = /*#__PURE__*/
                     }, _callee5);
                   }));
 
-                  return function unsubscribe() {
+                  return function subscribe() {
                     return _ref9.apply(this, arguments);
+                  };
+                }();
+
+                var unsubscribe =
+                /*#__PURE__*/
+                function () {
+                  var _ref10 = _asyncToGenerator(
+                  /*#__PURE__*/
+                  regeneratorRuntime.mark(function _callee6() {
+                    var chatNode;
+                    return regeneratorRuntime.wrap(function _callee6$(_context6) {
+                      while (1) {
+                        switch (_context6.prev = _context6.next) {
+                          case 0:
+                            _context6.next = 2;
+                            return getOrCreateChatNode();
+
+                          case 2:
+                            chatNode = _context6.sent;
+                            napi.unsubscribeFromNodeChildrenUpdates(chatNode.id, callback);
+
+                          case 4:
+                          case "end":
+                            return _context6.stop();
+                        }
+                      }
+                    }, _callee6);
+                  }));
+
+                  return function unsubscribe() {
+                    return _ref10.apply(this, arguments);
                   };
                 }();
 
@@ -250,48 +300,54 @@ var index = /*#__PURE__*/
               var sendMessage =
               /*#__PURE__*/
               function () {
-                var _ref10 = _asyncToGenerator(
+                var _ref11 = _asyncToGenerator(
                 /*#__PURE__*/
-                regeneratorRuntime.mark(function _callee6() {
+                regeneratorRuntime.mark(function _callee7() {
                   var chatNode, newMessageNode;
-                  return regeneratorRuntime.wrap(function _callee6$(_context6) {
+                  return regeneratorRuntime.wrap(function _callee7$(_context7) {
                     while (1) {
-                      switch (_context6.prev = _context6.next) {
+                      switch (_context7.prev = _context7.next) {
                         case 0:
                           console.log('in submit', message);
 
                           if (!(message !== '')) {
-                            _context6.next = 10;
+                            _context7.next = 10;
                             break;
                           }
 
-                          _context6.next = 4;
+                          _context7.next = 4;
                           return getOrCreateChatNode();
 
                         case 4:
-                          chatNode = _context6.sent;
-                          _context6.next = 7;
+                          chatNode = _context7.sent;
+                          _context7.next = 7;
                           return napi.createNode(null, {
                             parentId: chatNode.id,
-                            name: message
+                            name: message,
+                            sides: {
+                              users: [{
+                                id: viewer.node,
+                                role: 'admin'
+                              }]
+                            }
                           });
 
                         case 7:
-                          newMessageNode = _context6.sent;
+                          newMessageNode = _context7.sent;
                           console.log('new message node', newMessageNode); // setMessages([...messages, { id: messages.length + 1, text: message }])
 
                           setMessage('');
 
                         case 10:
                         case "end":
-                          return _context6.stop();
+                          return _context7.stop();
                       }
                     }
-                  }, _callee6);
+                  }, _callee7);
                 }));
 
                 return function sendMessage() {
-                  return _ref10.apply(this, arguments);
+                  return _ref11.apply(this, arguments);
                 };
               }();
 
@@ -312,19 +368,38 @@ var index = /*#__PURE__*/
                 return React.createElement(Box, {
                   key: message.id,
                   fill: "horizontal",
-                  height: "xsmall",
+                  height: {
+                    min: 'xsmall',
+                    max: 'xsmall'
+                  },
                   background: {
                     color: 'black',
                     opacity: 'medium'
                   },
                   pad: "small"
-                }, message.text);
-              }), React.createElement(TextInput, {
+                }, message.author.name, ": ", React.createElement(NodeLink, {
+                  node: message.id
+                }, React.createElement(Anchor, null, message.text)));
+              })), React.createElement(Box, {
+                direction: "row",
+                fill: "horizontal",
+                pad: "small",
+                background: {
+                  color: 'black',
+                  opacity: 'medium'
+                },
+                gap: "xsmall"
+              }, React.createElement(Keyboard, {
+                onEnter: function onEnter(e) {
+                  return sendMessage();
+                }
+              }, React.createElement(TextInput, {
+                autoFocus: true,
                 value: message,
                 onChange: function onChange(event) {
                   return setMessage(event.target.value);
                 }
-              }), React.createElement(Button, {
+              })), React.createElement(Button, {
                 label: "Send",
                 onClick: function onClick() {
                   return sendMessage();
@@ -334,8 +409,8 @@ var index = /*#__PURE__*/
 
             edit = view;
 
-            icon = function icon(_ref11) {
-              var node = _ref11.node;
+            icon = function icon(_ref12) {
+              var node = _ref12.node;
               return React.createElement(Box, {
                 fill: true,
                 align: "center",
@@ -346,7 +421,7 @@ var index = /*#__PURE__*/
             };
 
             preview = icon;
-            return _context7.abrupt("return", {
+            return _context8.abrupt("return", {
               modes: {
                 icon: icon,
                 preview: preview,
@@ -355,12 +430,12 @@ var index = /*#__PURE__*/
               }
             });
 
-          case 9:
+          case 10:
           case "end":
-            return _context7.stop();
+            return _context8.stop();
         }
       }
-    }, _callee7);
+    }, _callee8);
   }));
 
   return function (_x) {

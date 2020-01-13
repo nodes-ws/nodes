@@ -8,7 +8,6 @@ import initNApi from '../lib/core/napi'
 import HubBackend from '../lib/backends/hub'
 import config from '../lib/config'
 import nodes from '../lib/nodes'
-
 const napi = initNApi({ backend: new HubBackend({ url: config.hubApiUrl, nodes }), env: config })
 if (typeof window !== 'undefined') window.napi = napi
 

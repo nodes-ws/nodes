@@ -24,7 +24,7 @@ const nodes = [
   { status: 'ok', parentId: 'nodes-ws', id: 'users', name: 'Users', sides: { desktop: true } },
   { status: 'ok', parentId: 'nodes-ws', id: 'plugins', name: 'Plugins', sides: { desktop: true } },
   ...genCorePluginNodes(['ui', 'json', 'user', 'users', 'settings', 'search', 'side', 'node', 'login', 'error', 'remove', 'desktop', 'plugin', 'import', 'export', 'merge', 'nstore']),
-  ...genCommonPluginNodes(['link', 'note', 'markdown', 'web'])
+  ...genCommonPluginNodes(['link', 'note', 'markdown', 'web', 'chat'])
 ]
 
 module.exports = nodes

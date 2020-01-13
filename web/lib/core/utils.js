@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 // ui
 import {
-  Grid, Box, Text, Image, Anchor, Menu, ResponsiveContext, Paragraph,
+  Grid, Box, Text, Image, Anchor, Menu, ResponsiveContext, Paragraph, Keyboard,
   ThemeContext, TextInput, CheckBox, Button, Stack, InfiniteScroll, Table, Markdown
 } from 'grommet'
 import {
@@ -42,7 +42,7 @@ const NodehubLogo = dynamic(() => import('./components/utils/NodehubLogo')) // c
 const http = axios
 const lodash = { get, find, debounce, throttle, isEqual }
 const Grommet = {
-  Grid, Box, Text, Image, Anchor, Menu, ResponsiveContext,
+  Grid, Box, Text, Image, Anchor, Menu, ResponsiveContext, Keyboard,
   ThemeContext, TextInput, CheckBox, Button, Stack, InfiniteScroll, Table, Markdown, Paragraph
 }
 const icons = {
