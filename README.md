@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://nodes.ws">
-    <img alt="Nodes" src="https://nodes.ws/static/nodes.jpeg" width="75%" height="75%" />
+    <img alt="Nodes" src="https://nodes.vercel.app/static/nodes.jpeg" width="75%" height="75%" />
   </a>
 </p>
 
@@ -28,7 +28,7 @@
 
 <p align="center">
   <a href="https://nodes.ws">
-    <img alt="What is Nodes?" src="https://nodes.ws/static/demo.gif" width="75%" height="75%" />
+    <img alt="What is Nodes?" src="https://nodes.vercel.app/static/demo.gif" width="75%" height="75%" />
   </a>
 </p>
 
